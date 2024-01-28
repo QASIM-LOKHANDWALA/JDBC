@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class UpdateApp {
+public class P4_UpdateApp {
 	public static void main(String[] args) throws ClassNotFoundException,SQLException{
         //Establish Connection
         String url="jdbc:mysql:///practice";

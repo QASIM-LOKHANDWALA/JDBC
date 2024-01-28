@@ -5,9 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Scanner;
 
-public class DynamicInsert {
+public class P3_DeleteApp {
 	public static void main(String[] args) throws ClassNotFoundException,SQLException{
         //Establish Connection
         String url="jdbc:mysql:///practice";
@@ -17,25 +16,13 @@ public class DynamicInsert {
         Connection connection = DriverManager.getConnection(url,username ,password);
         System.out.println("The implement class name is: " + connection.getClass().getName());
 
-        //Take Input from User
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter ID : ");
-        int id = sc.nextInt();
-        System.out.print("Enter NAME : ");
-        String name = sc.next();
-        System.out.print("Enter AGE : ");
-        int age = sc.nextInt();
-        System.out.print("Enter ADDRESS : ");
-        String address = sc.next();
-        
-        
         //Create the Statement Object and send Query
-        String sqlInsertQuery = String.format("insert into player (`sid`,`sname`,`sage`,`saddress`) values (%d,'%s',%d,'%s')",id,name,age,address);
+        String sqlDeleteQuery = "delete from player where sid=3";
         Statement statement = connection.createStatement();
         System.out.println("The implementation class name is: "+statement.getClass().getName());
         
         //Execute the Query
-        int rowAffected = statement.executeUpdate(sqlInsertQuery);
+        int rowAffected = statement.executeUpdate(sqlDeleteQuery);
         System.out.println("NUMBER OF ROWS AFFECTED ARE : "+rowAffected);
         
         //Print table
@@ -44,11 +31,11 @@ public class DynamicInsert {
         
         System.out.println("ID\tNAME\tAGE\tADDRESS");
         while(resultSet.next()) {
-        	Integer sid = resultSet.getInt(1);
-            String sname = resultSet.getString(2);
-            Integer sage = resultSet.getInt(3);
-            String saddress = resultSet.getString(4);
-        	System.out.println(sid+"\t"+sname+"\t"+sage+"\t"+saddress);
+        	Integer id = resultSet.getInt(1);
+            String name = resultSet.getString(2);
+            Integer age = resultSet.getInt(3);
+            String address = resultSet.getString(4);
+        	System.out.println(id+"\t"+name+"\t"+age+"\t"+address);
         }
 
         //Close the Resources

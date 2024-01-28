@@ -2,7 +2,7 @@ package in.qasim.main;
 
 import java.sql.*;
 
-public class SelectApp {
+public class P1_SelectApp {
 
 
     public static void main(String[] args) throws ClassNotFoundException,SQLException{

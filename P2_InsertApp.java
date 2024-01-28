@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class InsertApp {
+public class P2_InsertApp {
 	public static void main(String[] args) throws ClassNotFoundException,SQLException{
         //Establish Connection
         String url="jdbc:mysql:///practice";
