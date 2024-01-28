@@ -1,11 +1,13 @@
 package in.qasim.main;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-public class SelectApp {
-
-
-    public static void main(String[] args) throws ClassNotFoundException,SQLException{
+public class UpdateApp {
+	public static void main(String[] args) throws ClassNotFoundException,SQLException{
         //Establish Connection
         String url="jdbc:mysql:///practice";
         //if downloaded using default paths then no need to write "localhost:3306"     
@@ -15,21 +17,25 @@ public class SelectApp {
         System.out.println("The implement class name is: " + connection.getClass().getName());
 
         //Create the Statement Object and send Query
-        String sqlSelectQuery = "select sid,sname,sage,saddress from player";
+        String sqlUpdateQuery = "update player set sage=55 where sid=3";
         Statement statement = connection.createStatement();
         System.out.println("The implementation class name is: "+statement.getClass().getName());
+        
+        //Execute the Query
+        int rowAffected = statement.executeUpdate(sqlUpdateQuery);
+        System.out.println("NUMBER OF ROWS AFFECTED ARE : "+rowAffected);
+        
+        //Print table
+        String sqlSelectQuery = "select * from player";
         ResultSet resultSet = statement.executeQuery(sqlSelectQuery);
-        System.out.println("The implementation class name is: "+resultSet.getClass().getName());
-
+        
         System.out.println("ID\tNAME\tAGE\tADDRESS");
-        //Process the resultSet
-        while (resultSet.next()) {
-            Integer id = resultSet.getInt(1);
+        while(resultSet.next()) {
+        	Integer id = resultSet.getInt(1);
             String name = resultSet.getString(2);
             Integer age = resultSet.getInt(3);
             String address = resultSet.getString(4);
-
-            System.out.println(id + "\t" + name + "\t" + age + "\t" + address);
+        	System.out.println(id+"\t"+name+"\t"+age+"\t"+address);
         }
 
         //Close the Resources
@@ -37,5 +43,4 @@ public class SelectApp {
         statement.close();
         connection.close();
     }
-
 }
