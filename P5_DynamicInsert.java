@@ -52,6 +52,7 @@ public class P5_DynamicInsert {
         }
 
         //Close the Resources
+		sc.close();
         resultSet.close();
         statement.close();
         connection.close();

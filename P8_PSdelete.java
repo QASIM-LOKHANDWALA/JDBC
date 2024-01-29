@@ -6,7 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.Scanner;
 
-public class P7_DynamicPS {
+public class P8_PSdelete {
 	public static void main(String[] args) throws ClassNotFoundException,SQLException{
         Scanner sc = new Scanner(System.in);
 		Connection connection = null;
@@ -17,30 +17,22 @@ public class P7_DynamicPS {
         try {
         	connection = DriverManager.getConnection(url,username,password);
         	System.out.println("ESTABLISHED THE CONNECTION!");
-        	String sqlInsertQuery = "insert into player values (?,?,?,?)";
+        	String sqlDeleteQuery = "delete from player where sid=?";
         	if(connection != null) {
-        		Pstatement = connection.prepareStatement(sqlInsertQuery);
+        		Pstatement = connection.prepareStatement(sqlDeleteQuery);
         	}
         	if(Pstatement != null) {
-        		// Take user Input
-        		System.out.print("ENTER ID : ");
+        		System.out.print("ENTER ID TO DELETE : ");
         		int id = sc.nextInt();
-        		System.out.print("ENTER NAME : ");
-        		String name = sc.next();
-        		System.out.print("ENTER AGE : ");
-        		int age = sc.nextInt();
-        		System.out.print("ENTER ADDERSS : ");
-        		String address = sc.next();
-        		
-        		// Use PreCompiled Query to set Values
+        	
         		Pstatement.setInt(1,id);
-        		Pstatement.setString(2,name);
-        		Pstatement.setInt(3,age);
-        		Pstatement.setString(4,address);
         		
-        		// Execute the Query
         		int rows = Pstatement.executeUpdate();
-        		System.out.println("NUMBER OF ROWS AFFECTED : "+rows);
+        		if(rows==0) {
+        			System.out.println("NO RECORD FOUND");
+        		}else {
+        			System.out.println("NUMBER OF ROWS AFFECTED : "+rows);
+        		}
         	}
         }catch(SQLException e) {
         	e.printStackTrace();
@@ -57,4 +49,5 @@ public class P7_DynamicPS {
         	}
         }
     }
+
 }
